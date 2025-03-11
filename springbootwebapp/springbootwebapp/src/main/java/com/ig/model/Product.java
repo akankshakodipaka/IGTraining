@@ -6,9 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name="products")
-@NamedQuery(name = "getAllProduct", query = "SELECT p FROM products p")
 public class Product implements Serializable {
 	public Integer id;
 	public String name;
