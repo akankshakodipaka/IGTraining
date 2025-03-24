@@ -1,0 +1,135 @@
+1.Create Counter application using  and Class components.
+display 2 buttons - ++    --
+use state and perform increment and decrement operations using usedefined functions and setState method.
+
+import React,{Component} from "react";
+class App extends React.Component{
+  constructor(){
+    super();
+    this.state={value: ' '};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInc=this.handleInc.bind(this);
+    this.handleDec=this.handleDec.bind(this);
+  }
+  handleChange(event){
+    this.setState({value:parseInt(event.target.value)});
+  }
+  handleInc(event){
+    //this.setState({value:this.state.value++});
+    this.setState((prevState) => ({ value: prevState.value +1 }));
+    //event.preventDefault();
+  }
+  handleDec(event){
+    //this.setState({value:this.state.value--});
+    this.setState((prevState) => ({ value: prevState.value -1 }));
+  }
+  render(){
+    var style={
+      fontsize:300,
+      color:'Green'
+    }
+    return(
+      <center>
+      <div >
+        <h1 style={style}>Counter Form</h1>
+        <br>
+        </br>
+        <input type="text" onChange={this.handleChange}/>
+        <br></br>
+        <label>Counter:{this.state.value}</label>
+        <br></br>
+        <input type="submit" value="Increment" onClick={this.handleInc}/>
+        
+        <input type="submit" value="Decrement" onClick={this.handleDec}/>
+        
+
+      </div>
+      </center>
+    )
+  }
+}
+export default App;
+------------------------------------------------
+2.Create application to display Mobile details, Id,Model,Price details  using  child component ( MobileDetails).
+
+import React,{Component} from "react";
+class App extends React.Component{
+  render(){
+    return(<div>
+      <h1>Mobile Details</h1>
+      <div>
+        <Mobile id="102" model="Realme" price="16000"/>
+      </div>
+    </div>);
+  }
+}
+export default App;
+class Mobile extends Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return(<div>
+      <h3>Id:{this.props.id}</h3>
+      <h3>Model:{this.props.model}</h3>
+      <h3>Price:{this.props.price}</h3>
+    </div>) 
+  }
+}
+-------------------------------------------------------------------------------
+3.Create application to send number1,number2 values read from form in  App component  and send to  child Calculator component  and perform sum,diff,product calculations and display  results. 
+import React, { Component } from "react";
+
+
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      num1: 0,
+      num2: 0
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    var num1 = parseFloat(event.target.num1.value);
+    var num2 = parseFloat(event.target.num2.value);
+    this.setState({ num1: num1, num2: num2 });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>React Calculator</h1>
+        <form onSubmit={this.handleSubmit}>
+          <input type="number" name="num1" placeholder="Enter first number" />
+          <input type="number" name="num2" placeholder="Enter second number" />
+          <button type="submit">Calculate</button>
+        </form>
+        <Calculator num1={this.state.num1} num2={this.state.num2} />
+      </div>
+    );
+  }
+}
+
+export default App;
+class Calculator extends Component {
+  render() {
+    const num1 = this.props.num1;
+    const num2 = this.props.num2;
+    const sum = num1 + num2;
+    const diff = num1 - num2;
+    const product = num1 * num2;
+
+    return (
+      <div>
+        <h2>Calculation Results:</h2>
+        <p>Sum: {sum}</p>
+        <p>Difference: {diff}</p>
+        <p>Product: {product}</p>
+      </div>
+    );
+  }
+}
