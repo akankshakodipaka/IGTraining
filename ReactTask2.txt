@@ -1,0 +1,135 @@
+Login
+1.Create React application using Functional components , to display LoginForm, input ID,PWD
+check ID and PWD should be "iguser" and "password" , once form submitted , alert("Valid User")  else
+"Invaild USer".  ( Forms, useState).
+
+
+import React,{useState} from "react";
+function Loign(){
+  const[id,setId]=useState("");
+  const[pwd,setPwd]=useState("");
+  function handleSubmit(event){
+    if(id ==="iguser" && pwd==="password"){
+        alert("Valid User");
+    }
+    else{
+      alert("Invalid User");
+    }
+  }
+  return(
+    <div>
+      
+      <form onSubmit={handleSubmit}>
+        
+        <center>
+        <h1>Login Form</h1>
+        <input type="text" value={id} onChange={(x)=>setId(x.target.value)}/>
+        <br></br>
+        <input type="text" value={pwd} onChange={(x)=>setPwd(x.target.value)}/>
+        <br></br>
+        <button type="submit"> 
+          Login
+        </button>
+        </center>
+      </form>
+    </div>
+  )
+}
+export default Loign;
+----------------------------------------------------------------------------------------------
+Signup
+2.Create React application to Signup Customer with details and review details 
+by clicking on Review button.
+CustomerId,Name,Email,Gender,City(Hyd,Chennai,Pune...).
+
+import React, { useState } from "react";
+
+function SignupForm() {
+  const [customerId, setCustomerId] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [city, setCity] = useState("");
+  const [review, setReview] = useState(null);
+
+  function handleReview(event) {
+    event.preventDefault();
+    setReview({ customerId, name, email, gender, city });
+  }
+
+  return (
+    <div>
+      <center>
+      <h2>Signup Form</h2>
+      <form onSubmit={handleReview}>
+        <label>CustomerId:</label>
+        <input
+          type="text"
+          placeholder="Customer ID"
+          value={customerId}
+          onChange={(e) => setCustomerId(e.target.value)}
+        />
+        <br />
+        <br />
+        <label>Name:</label>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <br />
+        <br />
+        <label>Email:</label>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <br />
+        <br />
+        <label>Gender:</label>
+        <input
+          type="radio"
+          name="gender"
+          value="Male"
+          onChange={(e) => setGender(e.target.value)}
+        /> Male
+        
+        <input
+          type="radio"
+          name="gender"
+          value="Female"
+          onChange={(e) => setGender(e.target.value)}
+        /> Female
+        <br />
+        <br />
+        <label>City:</label>
+        <select value={city} onChange={(e) => setCity(e.target.value)}>
+          <option value="">Select City</option>
+          <option value="Hyderabad">Hyderabad</option>
+          <option value="Chennai">Chennai</option>
+          <option value="Pune">Pune</option>
+        </select>
+        <br />
+        <br />
+        <button type="submit">Review</button>
+      </form>
+      {review && (
+        <div>
+          <h3>Review Details</h3>
+          <p>Customer ID: {review.customerId}</p>
+          <p>Name: {review.name}</p>
+          <p>Email: {review.email}</p>
+          <p>Gender: {review.gender}</p>
+          <p>City: {review.city}</p>
+        </div>
+      )}
+      </center>
+    </div>
+  );
+}
+
+export default SignupForm;
+
